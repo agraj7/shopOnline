@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
+import {toast} from "react-toastify"
 
 const categories = [
   "Laptop",
@@ -44,8 +45,22 @@ const Products = () => {
   }
 
   useEffect(() => {
+    if(error)
+    {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      dispatch(clearErrors);
+    }
     dispatch(getProduct(keyword, currentPage,price,category,ratings));
-  }, [dispatch, keyword, currentPage,price,category,ratings]);
+  }, [dispatch, keyword, currentPage,price,category,ratings,error]);
 
   return (
     <div>
@@ -70,7 +85,7 @@ const Products = () => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={30000}
+              max={200000}
             />
             </div>
             <div>
@@ -93,7 +108,7 @@ const Products = () => {
               setRatings(newRatings);
 
               }}
-              aria-lebellledby="continuous-slider"
+              aria-labelledby="continuous-slider"
               min={0}
               max={5}
               valueLabelDisplay="auto"

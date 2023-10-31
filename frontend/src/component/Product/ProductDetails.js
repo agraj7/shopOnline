@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import Loader from "../layout/Loader/Loader";
 import {toast} from "react-toastify"
 import ReviewCard from "./ReviewCard"
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -50,6 +51,7 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <div>
+          <MetaData title={`${product.name} - shopOnline`} />
       <div className="ProductDetails">
         <div className="leftContainer">
           {product.images &&
@@ -58,6 +60,7 @@ const ProductDetails = () => {
                 className="CarousalImage"
                 key={item.url}
                 src={item.url}
+                height={500}
                 alt={`${i} Slide`}
               />
             ))}
