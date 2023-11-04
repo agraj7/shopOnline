@@ -1,6 +1,7 @@
 const ErrorHandler = require("../utils/errorHandler");
 
 module.exports = (err, req, res, next) => {
+  console.log('Error handling middleware executed:', err);
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal server error";
 
@@ -23,7 +24,7 @@ module.exports = (err, req, res, next) => {
   }
 
   // JwT expire error
-  if (err.name === "JsonWebExpiredError") {
+  if (err.name === "JsonWebTokenExpiredError") {
     const message = `Json Web token is invalid now, try again`;
     err = new ErrorHandler(message, 400);
   }
