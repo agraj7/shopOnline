@@ -13,3 +13,14 @@
   font-size:2vmax;
   color:darkgreen;
 }
+.speedDial {
+  position: fixed;
+  right: 4vmax;
+  top: 5vmax;
+}
+
+.speedDialIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
