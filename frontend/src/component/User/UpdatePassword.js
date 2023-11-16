@@ -47,7 +47,7 @@ const UpdatePassword = () => {
         type: UPDATE_PASSWORD_RESET,
       });
     }
-  }, [dispatch, error, isUpdated]);
+  }, [dispatch, error,navigate, isUpdated]);
 
   return (
     <Fragment>

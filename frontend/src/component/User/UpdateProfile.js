@@ -83,7 +83,7 @@ const navigate= useNavigate();
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, user, isUpdated]);
+  }, [dispatch, error, user,navigate, isUpdated]);
   return (
     <Fragment>
       {loading ? (

@@ -76,10 +76,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   }
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
-  const message = `You are receiving this because you requested for the password to be changed.\n\n Please click on the following link \n\n ${resetPasswordUrl} \n\n If you have not requested this email. Then, please ignore it.`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const message = `You are receiving this because you requested for the password to be changed..\n\n Please click on the following link \n\n ${resetPasswordUrl} \n\n If you have not requested this email. Then, please ignore it.`;
 
   try {
     await sendEmail({
