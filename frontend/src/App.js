@@ -15,6 +15,7 @@ import UserOptions from "./component/layout/Header/UserOptions.js"
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile.js"
 import ProtectedRoute from './component/Route/ProtectedRoute.js';
+import UpdateProfile from "./component/User/UpdateProfile.js"
 
 function App() {
 
@@ -40,7 +41,10 @@ function App() {
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
         {isAuthenticated ? (
+          <>
           <Route path="/account" element={<Profile />} />
+          <Route path="/me/update" element={<UpdateProfile/>}/>
+          </>
         ) : (
           <Route path="/login" element={<LoginSignUp />} />
         )}

@@ -12,6 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileImage from "../../../images/Profile.png"
+import {toast} from "react-toastify";
 
 const UserOptions = ({ user }) => {
   // const { cartItems } = useSelector((state) => state.cart);
@@ -62,8 +63,14 @@ const UserOptions = ({ user }) => {
     navigate("/cart")
   }
   function logoutUser() {
-    dispatch(logout());
-    // alert.success("Logout Successfully");
+    try{
+      dispatch(logout());
+      toast.success("logout successfully");
+    }
+    catch (error) {
+    toast.error("cannot logout");
+  }
+  
   }
 
   return (
