@@ -100,12 +100,12 @@ const ProductDetails = () => {
                 <input readOnly type="number" value={quantity} />
                 <button onClick={increaseQuantity}>+</button>
               </div>
-              <button onClick={addToCartHandler}>Add to cart</button>
+              <button disabled={product.Stock<1} onClick={addToCartHandler}>Add to cart</button>
             </div>
             <p>
               Status : {""}
               <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                {product.stock < 1 ? "OutOfStock" : "InStock"}
+                {product.Stock < 1 ? "OutOfStock" : "InStock"}
               </b>
             </p>
           </div>

@@ -45,6 +45,11 @@ const orderSchema =  new mongoose.Schema({
             ref:"Product",
             required:true,
         },
+        price: {
+            type: Number,
+            required: [true, "Please Enter product Price"],
+            maxLength: [8, "Price cannot exceed 8 characters"],
+          },
         },],
 
         user:{
