@@ -3,7 +3,7 @@ import Header from "./component/layout/Header/Header.js"
 import Footer from './component/layout/Footer/Footer'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import webFont from "webfontloader"
-import React from "react"
+import React,{useState,useEffect} from "react"
 import Home from "./component/Home/Home.js"
 import ProductDetails from "./component/Product/ProductDetails.js"
 import Products from "./component/Product/Products.js"
@@ -19,18 +19,33 @@ import UpdatePassword from "./component/User/UpdatePassword.js"
 import ForgotPassword from "./component/User/ForgotPassword.js"
 import ResetPassword from "./component/User/ResetPassword.js"
 import Cart from "./component/Cart/Cart.js"
+import Shipping from "./component/Cart/Shipping.js"
+import ConfirmOrder from "./component/Cart/ConfirmOrder.js"
+import Payment from "./component/Cart/Payment.js"
+import axios from "axios"
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import OrderSuccess from "./component/Cart/OrderSuccess.js"
 
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey,setStripeApiKey]= useState("");
 
-  React.useEffect(()=>{
+  async function getStripeApiKey(){
+    const {data}=await axios.get("api/v1/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
+    console.log(data.stripeApiKey)
+  }
+
+    useEffect(()=>{
     webFont.load({
       google:{
         families:['Roboto',"Dravid Sans"]
       }
       })
       store.dispatch(loadUser())
+      getStripeApiKey();
   },[])
   
   return (
@@ -51,6 +66,16 @@ function App() {
           <Route path="/account" element={<Profile />} />
           <Route path="/me/update" element={<UpdateProfile/>}/>
           <Route path = "/password/update" element ={<UpdatePassword/>}/>
+          <Route path = "/shipping" element= {<Shipping/>}/>
+          <Route path ="/order/confirm" element={<ConfirmOrder/>}/>
+          {stripeApiKey && (
+        <Route path="/process/payment" element={
+          <Elements stripe={loadStripe(stripeApiKey)}>
+            <Payment />
+          </Elements>
+        } />
+      )}
+          <Route path="/success" element={<OrderSuccess/>}/>
           </>
         ) : (
           <Route path="/login" element={<LoginSignUp />} />

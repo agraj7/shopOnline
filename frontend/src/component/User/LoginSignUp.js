@@ -1,7 +1,7 @@
 import React,{useRef,useState,useEffect} from "react"
 import "./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import FaceIcon from "@mui/icons-material/Face";
@@ -9,10 +9,13 @@ import Profile from "../../images/Profile.png";
 import {useDispatch,useSelector} from "react-redux"
 import { clearErrors,login,register } from "../../actions/userAction";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router";
 
 const LoginSignUp = () =>{
 
+    const {location}=useParams();
     const dispatch=useDispatch();
+    const navigate=useNavigate();
 
     const {error,loading,isAuthenticated}= useSelector(state=>state.user)
 
@@ -71,23 +74,7 @@ const registerSubmit = (e) => {
         });
   };
 
-    // const registerDataChange = (e)=>{
-    //     if(e.target.name==="avatar")
-    //     {
-    //         const reader=new FileReader();
-    //         reader.onload =()=>{
-    //             if(reader.readyState===2){
-    //                 setAvatarPreview(reader.result)
-    //                 setAvatar(reader.result);
-    //             }
-    //         }
-    //         reader.readAsDataURL(e.target.files[0]);
 
-    //     }
-    //     else{
-    //         setUser({...user,[e.target.name]:e.target.value})
-    //     }
-    // }
     const registerDataChange = (e) => {
         if (e.target.name === "avatar") {
           const reader = new FileReader();
@@ -114,6 +101,7 @@ const registerSubmit = (e) => {
         }
       };
       
+      const redirect = location ? location.split("=")[1] :"/account";
 
     useEffect(()=>{
         if(error)
@@ -131,13 +119,9 @@ const registerSubmit = (e) => {
         dispatch(clearErrors());
             }
             if(isAuthenticated){
-                setUser({
-                    name: "",
-                    email: "",
-                    password: "",
-                  });
+                    navigate(redirect);
             }
-    },[dispatch,error,isAuthenticated])
+    },[dispatch,error,navigate,redirect,isAuthenticated])
 
     const switchTabs= (e,tab) =>{
         if(tab==="login"){
