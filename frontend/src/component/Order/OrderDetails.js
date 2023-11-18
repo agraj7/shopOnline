@@ -105,7 +105,6 @@ const OrderDetails = () => {
                         {item.name}
                       </Link>{" "}
                       <span>
-                        {console.log(item.quantity)}
                         {item.quantity} X ₹{item.price} ={" "}
                         <b>₹{item.price * item.quantity}</b>
                       </span>

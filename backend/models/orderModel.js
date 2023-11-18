@@ -28,14 +28,15 @@ const orderSchema =  new mongoose.Schema({
         },
     },
     orderItems:[{
-        quantity:{
-            type:Number,
-            required:true,
-        },
         name:{
             type:String,
             required:true,
         },
+        quantity:{
+            type:Number,
+            required:true,
+        },
+
         image:{
             type:String,
             required:true,

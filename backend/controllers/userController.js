@@ -228,9 +228,14 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     email : req.body.email,
     role:req.body.role,
   }
-  //We will add cloudinary later for avatar
 
-  const user = await User.findByIdAndUpdate(req.params.id,newUserData,{
+let user = User.findById(req.params.id);
+
+if(!user){
+  return next(new ErrorHandler(`No such user with id ${req.params.id}`,404)
+  )}
+
+    await User.findByIdAndUpdate(req.params.id,newUserData,{
     new:true,
     runValidators:true,
     useFindAndModify:false,
@@ -252,7 +257,9 @@ exports.deleteUserProfile = catchAsyncErrors(async (req, res, next) => {
   }
   user = await User.findByIdAndDelete(req.params.id);
 
-    //We will remove cloudinary later
+  const imageId = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(imageId);
+
   res.status(200).json({
     success:true,
     message:"profile deleted successfully" ,

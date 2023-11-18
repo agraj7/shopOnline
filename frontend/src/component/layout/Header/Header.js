@@ -5,16 +5,7 @@ import "./Header.css";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  toast.info('Welcome to ShopOnline!', {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
+
 
   return (
     <div className="navBar">

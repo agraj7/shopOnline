@@ -28,6 +28,16 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from "./component/Cart/OrderSuccess.js"
 import MyOrders from "./component/Order/MyOrders.js"
 import OrderDetails from "./component/Order/OrderDetails.js"
+import Dashboard from "./component/Admin/Dashboard.js"
+import ProductList from "./component/Admin/ProductList.js"
+import NewProduct from './component/Admin/NewProduct.js';
+import UpdateProduct from "./component/Admin/UpdateProduct.js"
+import OrderList from "./component/Admin/OrderList.js"
+import ProcessOrder from "./component/Admin/ProcessOrder.js" 
+import UsersList from "./component/Admin/UsersList.js"
+import UpdateUser from "./component/Admin/UpdateUser.js"
+import ProductReviews from "./component/Admin/ProductReviews.js"
+import NotFound from "./component/layout/NotFound/NotFound";
 
 function App() {
 
@@ -79,14 +89,50 @@ function App() {
           <Route path="/success" element={<OrderSuccess/>}/>
           <Route path ="/orders" element = {<MyOrders/>}/>
           <Route path="/order/:id" element ={<OrderDetails/>}/>
+          <Route path="/admin/dashboard" element ={<Dashboard/>}/>
+          <Route path ="/admin/products" element = {<ProductList/>}/>
+          <Route path ="/admin/product" element ={<NewProduct/>}/>
+          <Route path ="/admin/product/:id" element ={<UpdateProduct/>}/>
+          <Route path = "/admin/orders" element={<OrderList/>}/>
+          <Route path = "/admin/order/:id" element={<ProcessOrder/>}/>
+          <Route path = "/admin/users" element={<UsersList/>}/>
+          <Route path ="/admin/user/:id" element ={<UpdateUser/>}/>
+          <Route path = "/admin/reviews" element={<ProductReviews/>}/>
           </>
         ) : (
           <Route path="/login" element={<LoginSignUp />} />
         )}
         <Route path="/login" element={<LoginSignUp/>} />
+
+
+
+        {!isAuthenticated && (
+          <>
+          <Route path="/account" element={<NotFound/>} />
+          <Route path="/me/update" element={<NotFound/>}/>
+          <Route path = "/password/update" element ={<NotFound/>}/>
+          <Route path = "/shipping" element= {<NotFound/>}/>
+          <Route exact path ="/order/confirm" element={<NotFound/>}/>
+          <Route path="/process/payment" element={<NotFound/>}/>
+          <Route path="/success" element={<NotFound/>}/>
+          <Route path ="/orders" element = {<NotFound/>}/>
+          <Route path="/order/:id" element ={<NotFound/>}/>
+          <Route path="/admin/dashboard" element ={<NotFound/>}/>
+          <Route path ="/admin/products" element = {<NotFound/>}/>
+          <Route path ="/admin/product" element ={<NotFound/>}/>
+          <Route path ="/admin/product/:id" element ={<NotFound/>}/>
+          <Route path = "/admin/orders" element={<NotFound/>}/>
+          <Route path = "/admin/order/:id" element={<NotFound/>}/>
+          <Route path = "/admin/users" element={<NotFound/>}/>
+          <Route path ="/admin/user/:id" element ={<NotFound/>}/>
+          <Route path = "/admin/reviews" element={<NotFound/>}/>
+          </>
+        )}
+        <Route path ="*" element={<NotFound/> }/>
         </Routes>
         <Footer/>
         </BrowserRouter>
   );
+  
 }
 export default App;

@@ -86,11 +86,13 @@ import {
       case ALL_ORDERS_REQUEST:
         return {
           loading: true,
+          // orders:[]
         };
   
       case ALL_ORDERS_SUCCESS:
         return {
           loading: false,
+          // error:null,
           orders: action.payload,
         };
   
@@ -123,6 +125,7 @@ import {
         return {
           ...state,
           loading: false,
+          // error:null,
           isUpdated: action.payload,
         };
   
@@ -172,6 +175,7 @@ import {
       case ORDER_DETAILS_SUCCESS:
         return {
           loading: false,
+          // error:null,
           order: action.payload,
         };
   
