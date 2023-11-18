@@ -7,7 +7,7 @@ const fileUpload = require("express-fileupload")
 const dotenv = require ("dotenv");
 
 
-dotenv.config({path:"backend/config/config.env"})
+dotenv.config({path:"config/config.env"})
 //it is used to convert the body code into json.
 app.use(express.json());
 app.use(cookieParser());
