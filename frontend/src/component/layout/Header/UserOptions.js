@@ -14,8 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileImage from "../../../images/Profile.png"
 import {toast} from "react-toastify";
 
-const UserOptions = ({ user }) => {
+const UserOptions = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const {user} = useSelector((state)=>state.user)
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   // const history = useHistory();
