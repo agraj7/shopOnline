@@ -104,7 +104,7 @@ const ProductDetails = () => {
                 className="CarousalImage"
                 key={item.url}
                 src={item.url}
-                height={500}
+                height={300}
                 alt={`${i} Slide`}
               />
             ))}

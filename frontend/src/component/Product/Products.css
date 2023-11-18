@@ -95,9 +95,10 @@
   
   @media screen and (max-width: 600px) {
     .filterBox {
-      width: 20vmax;
+      width: 42vmax;
       position: relative;
-      margin: auto;
+      font-size: 20vw;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
   
     .page-link {
@@ -105,5 +106,14 @@
     }
     .category-link {
       font: 400 1.8vmax "Roboto";
+     background-color: rgb(237, 235, 235);
+      border-radius:10px;
+      padding:0.5vw 1vw;
+    }
+    .categoryBox {
+      display: flex;
+      flex-wrap:wrap;
+      
+   
     }
   }
