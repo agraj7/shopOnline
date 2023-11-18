@@ -49,6 +49,7 @@ import {
         return {
           loading: true,
           isAuthenticated: false,
+          user:{},
         };
       case LOGIN_SUCCESS:
       case REGISTER_USER_SUCCESS:
