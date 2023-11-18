@@ -46,7 +46,7 @@ import {
       const config = { headers: { "Content-Type": "application/json" } };
   
       const { data } = await axios.post(
-        `/api/v1/login`,
+        `https://mernbackend-r4tf.onrender.com/api/v1/login`,
         { email, password },
         config
       );
