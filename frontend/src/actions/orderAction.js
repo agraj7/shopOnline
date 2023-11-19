@@ -21,21 +21,14 @@ import {
   } from "../constants/orderConstants";
   
   import axios from "axios";
+  import axiosInstance from "../Helpers/axiosInstance";
   
   // Create Order
   export const createOrder = (order) => async (dispatch) => {
     try {
       dispatch({ type: CREATE_ORDER_REQUEST });
   
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-      const { data } = await axios.post("https://mernbackend-r4tf.onrender.com/api/v1/order/new", order, config);
+      const { data } = await axiosInstance.post("api/v1/order/new", order);
   
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
     } catch (error) {
@@ -51,13 +44,7 @@ import {
     try {
       dispatch({ type: MY_ORDERS_REQUEST });
   
-      const config = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-      const { data } = await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/orders/me",config);
+      const { data } = await axiosInstance.get("api/v1/orders/me");
   
       dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {
@@ -73,14 +60,7 @@ import {
     try {
       dispatch({ type: ALL_ORDERS_REQUEST });
   
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-      const { data } = await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/admin/orders",config);
+      const { data } = await axiosInstance.get("api/v1/admin/orders");
   
       dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {
@@ -96,17 +76,9 @@ import {
     try {
       dispatch({ type: UPDATE_ORDER_REQUEST });
   
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
       const { data } = await axios.put(
-        `https://mernbackend-r4tf.onrender.com/api/v1/admin/order/${id}`,
+        `api/v1/admin/order/${id}`,
         order,
-        config
       );
   
       dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
@@ -122,14 +94,8 @@ import {
   export const deleteOrder = (id) => async (dispatch) => {
     try {
       dispatch({ type: DELETE_ORDER_REQUEST });
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-      const { data } = await axios.delete(`https://mernbackend-r4tf.onrender.com/api/v1/admin/order/${id}`,config);
+
+      const { data } = await axiosInstance.delete(`api/v1/admin/order/${id}`);
   
       dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
     } catch (error) {
@@ -144,14 +110,8 @@ import {
   export const getOrderDetails = (id) => async (dispatch) => {
     try {
       dispatch({ type: ORDER_DETAILS_REQUEST });
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-      const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/order/${id}`,config);
+
+      const { data } = await axiosInstance.get(`api/v1/order/${id}`);
   
       dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
     } catch (error) {

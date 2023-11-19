@@ -23,6 +23,7 @@ import Shipping from "./component/Cart/Shipping.js"
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js"
 import Payment from "./component/Cart/Payment.js"
 import axios from "axios"
+import axiosInstance from './Helpers/axiosInstance.js';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from "./component/Cart/OrderSuccess.js"
@@ -44,15 +45,9 @@ function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey,setStripeApiKey]= useState("");
 
-  const config = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-  };
 
   async function getStripeApiKey(){
-    const {data}=await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/stripeapikey",config);
+    const {data}=await axiosInstance.get("api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
   }
 

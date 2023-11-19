@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "../Helpers/axiosInstance";
 import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
@@ -35,20 +36,14 @@ export const getProduct = (keyword="",currentPage=1,price=[0,2000000],category,r
     dispatch({ 
         type: ALL_PRODUCT_REQUEST 
     });
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
 
-    let link=`https://mernbackend-r4tf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+
+    let link=`api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
     if(category){
-      link=`https://mernbackend-r4tf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+      link=`api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
     }
 
-    const { data } = await axios.get(link,config);
+    const { data } = await axiosInstance.get(link);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
@@ -65,14 +60,7 @@ export const getAdminProduct = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCT_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
-    const { data } = await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/admin/products",config);
+    const { data } = await axiosInstance.get("api/v1/admin/products");
 
     dispatch({
       type: ADMIN_PRODUCT_SUCCESS,
@@ -90,17 +78,9 @@ export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-     }
-    };
-
-    const { data } = await axios.post(
-      `https://mernbackend-r4tf.onrender.com/api/v1/admin/product/new`,
+    const { data } = await axiosInstance.post(
+      `api/v1/admin/product/new`,
       productData,
-      config
     );
 
     dispatch({
@@ -118,19 +98,10 @@ export const createProduct = (productData) => async (dispatch) => {
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-
-    const config = {
-      headers: { "Content-Type": "application/json" ,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-    };
-
     
     const { data } = await axios.put(
-      `https://mernbackend-r4tf.onrender.com/api/v1/admin/product/${id}`,
+      `api/v1/admin/product/${id}`,
       productData,
-      config
     );
 
     dispatch({
@@ -148,14 +119,8 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
 
-    const { data } = await axios.delete(`https://mernbackend-r4tf.onrender.com/api/v1/admin/product/${id}`,config);
+    const { data } = await axiosInstance.delete(`api/v1/admin/product/${id}`);
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
@@ -172,14 +137,8 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
 
-    const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/product/${id}`,config);
+    const { data } = await axiosInstance.get(`api/v1/product/${id}`);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -197,14 +156,8 @@ export const newReview = (reviewData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_REVIEW_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "application/json" ,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
 
-    const { data } = await axios.put(`https://mernbackend-r4tf.onrender.com/api/v1/review`, reviewData, config);
+    const { data } = await axiosInstance.put(`api/v1/review`, reviewData);
 
     dispatch({
       type: NEW_REVIEW_SUCCESS,
@@ -221,13 +174,8 @@ export const newReview = (reviewData) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
   try {
     dispatch({ type: ALL_REVIEW_REQUEST });
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
-    const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/reviews?id=${id}`,config);
+
+    const { data } = await axiosInstance.get(`api/v1/reviews?id=${id}`);
 
     dispatch({
       type: ALL_REVIEW_SUCCESS,
@@ -246,14 +194,9 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
-    const { data } = await axios.delete(
-      `https://mernbackend-r4tf.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`,config
+
+    const { data } = await axiosInstance.delete(
+      `api/v1/reviews?id=${reviewId}&productId=${productId}`
     );
 
     dispatch({

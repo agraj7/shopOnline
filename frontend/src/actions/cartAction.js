@@ -1,20 +1,16 @@
+import axiosInstance from "../Helpers/axiosInstance";
 import {
     ADD_TO_CART,
     REMOVE_CART_ITEM,
     SAVE_SHIPPING_INFO,
   } from "../constants/cartConstants";
   import axios from "axios";
+ import axiosInstance from "../Helpers/axiosInstance";
   
   // Add to Cart
   export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-    };
 
-    const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/product/${id}`,config);
+    const { data } = await axiosInstance.get(`api/v1/product/${id}`);
   
     dispatch({
       type: ADD_TO_CART,
