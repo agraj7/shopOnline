@@ -12,6 +12,15 @@ const dotenv = require ("dotenv");
 dotenv.config({path:"config/config.env"})
 //it is used to convert the body code into json.
 
+// Example in Express.js
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://shop-online-lake.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
+  
 app.use(cors({
     origin:["https://shop-online-lake.vercel.app"],
     methods :["POST","GET","PUT","DELETE"],
