@@ -80,7 +80,13 @@ import {
     try {
       dispatch({ type: LOAD_USER_REQUEST });
   
-      const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/me`);
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        }
+      };
+      const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/me`,config);
   
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
     } catch (error) {

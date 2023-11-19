@@ -15,7 +15,8 @@ dotenv.config({path:"config/config.env"})
 app.use(cors({
     origin:["https://shop-online-lake.vercel.app"],
     methods :["POST","GET","PUT","DELETE"],
-    credentials:true
+    credentials:true,
+    optionSuccessStatus:200
 }))
 
 app.use(express.json());
