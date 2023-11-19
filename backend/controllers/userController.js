@@ -7,34 +7,16 @@ const crypto = require("crypto");
 const cloudinary = require("cloudinary")
 
 
-//Register a user
-// exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
-//   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
-//     folder:"avatars",
-//     width:150,
-//     crop:"scale",
-//   }) 
-  
-//   const { name, email, password } = req.body;
-//   if (!name || !email || !password) {
-//     return next(new ErrorHandler("Please provide all the fields", 400));
-//   }
-//   const user = await User.create({
-//     //When the names are same then, we can pass values like name,email instead of name:name,email:email
-//     name,
-//     email,
-//     password,
-//     avatar: {
-//       public_id: myCloud.public_id,
-//       url: myCloud.secure_url,
-//     },
-//   });
-
-//   sendToken(user, 201, res);
-// });
+// Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password,avatars } = req.body;
+
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
+    folder:"avatars",
+    width:150,
+    crop:"scale",
+  }) 
+  
+  const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return next(new ErrorHandler("Please provide all the fields", 400));
   }
@@ -44,13 +26,31 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "sample id",
-      url: avatars,
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
 
   sendToken(user, 201, res);
 });
+// exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+//   const { name, email, password,avatars } = req.body;
+//   if (!name || !email || !password) {
+//     return next(new ErrorHandler("Please provide all the fields", 400));
+//   }
+//   const user = await User.create({
+//     //When the names are same then, we can pass values like name,email instead of name:name,email:email
+//     name,
+//     email,
+//     password,
+//     avatar: {
+//       public_id: "sample id",
+//       url: avatars,
+//     },
+//   });
+
+//   sendToken(user, 201, res);
+// });
 
 //Login a user and get JWT Token
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
