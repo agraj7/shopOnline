@@ -1,4 +1,3 @@
-import axiosInstance from "../Helpers/axiosInstance";
 import {
     ADD_TO_CART,
     REMOVE_CART_ITEM,
