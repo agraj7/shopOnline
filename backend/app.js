@@ -13,7 +13,7 @@ dotenv.config({path:"config/config.env"})
 //it is used to convert the body code into json.
 
 app.use(cors({
-    origin:["https://shop-online-lake.vercel.app/"],
+    origin:["https://shop-online-lake.vercel.app"],
     methods :["POST","GET","PUT","DELETE"],
     credentials:true
 }))
