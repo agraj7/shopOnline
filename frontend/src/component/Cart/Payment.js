@@ -53,11 +53,10 @@ const Payment = () => {
     payBtn.current.disabled = true;
 
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.post(
         "https://mernbackend-r4tf.onrender.com/api/v1/payment/process",
         paymentData,

@@ -44,8 +44,15 @@ function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey,setStripeApiKey]= useState("");
 
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
+  };
+
   async function getStripeApiKey(){
-    const {data}=await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/stripeapikey");
+    const {data}=await axios.get("https://mernbackend-r4tf.onrender.com/api/v1/stripeapikey",config);
     setStripeApiKey(data.stripeApiKey);
   }
 

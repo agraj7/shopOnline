@@ -43,7 +43,10 @@ import {
     try {
       dispatch({ type: LOGIN_REQUEST });
   
-      const config = { headers: { "Content-Type": "application/json" } };
+      const config = { headers: { "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+       } };
   
       const { data } = await axios.post(
         `https://mernbackend-r4tf.onrender.com/api/v1/login`,
@@ -62,8 +65,10 @@ import {
     try {
       dispatch({ type: REGISTER_USER_REQUEST });
   
-      const config = { headers: { "Content-Type": "multipart/form-data" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.post(`https://mernbackend-r4tf.onrender.com/api/v1/register`, userData, config);
   
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
@@ -97,7 +102,11 @@ import {
   // Logout User
   export const logout = () => async (dispatch) => {
     try {
-      await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/logout`);
+      const config = { headers: { 
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
+      await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/logout`,config);
   
       dispatch({ type: LOGOUT_SUCCESS });
     } catch (error) {
@@ -111,8 +120,10 @@ import {
     try {
       dispatch({ type: UPDATE_PROFILE_REQUEST });
   
-      const config = { headers: { "Content-Type": "multipart/form-data" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.put(`https://mernbackend-r4tf.onrender.com/api/v1/me/update`, userData, config);
   
       dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
@@ -129,8 +140,10 @@ import {
     try {
       dispatch({ type: UPDATE_PASSWORD_REQUEST });
   
-      const config = { headers: { "Content-Type": "application/json" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.put(
         `https://mernbackend-r4tf.onrender.com/api/v1/password/update`,
         passwords,
@@ -151,8 +164,10 @@ import {
     try {
       dispatch({ type: FORGOT_PASSWORD_REQUEST });
   
-      const config = { headers: { "Content-Type": "application/json" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.post(`https://mernbackend-r4tf.onrender.com/api/v1/password/forgot`, email, config);
   
       dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.message });
@@ -169,8 +184,10 @@ import {
     try {
       dispatch({ type: RESET_PASSWORD_REQUEST });
   
-      const config = { headers: { "Content-Type": "application/json" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.put(
         `https://mernbackend-r4tf.onrender.com/api/v1/password/reset/${token}`,
         passwords,
@@ -190,7 +207,11 @@ import {
   export const getAllUsers = () => async (dispatch) => {
     try {
       dispatch({ type: ALL_USERS_REQUEST });
-      const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/admin/users`);
+      const config = { headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
+      const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/admin/users`,config);
   
       dispatch({ type: ALL_USERS_SUCCESS, payload: data.users });
     } catch (error) {
@@ -202,6 +223,10 @@ import {
   export const getUserDetails = (id) => async (dispatch) => {
     try {
       dispatch({ type: USER_DETAILS_REQUEST });
+      const config = { headers: { "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
       const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/admin/user/${id}`);
   
       dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
@@ -215,8 +240,10 @@ import {
     try {
       dispatch({ type: UPDATE_USER_REQUEST });
   
-      const config = { headers: { "Content-Type": "application/json" } };
-  
+      const config = { headers: { "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+       } };
       const { data } = await axios.put(
         `https://mernbackend-r4tf.onrender.com/api/v1/admin/user/${id}`,
         userData,
@@ -236,8 +263,11 @@ import {
   export const deleteUser = (id) => async (dispatch) => {
     try {
       dispatch({ type: DELETE_USER_REQUEST });
-  
-      const { data } = await axios.delete(`https://mernbackend-r4tf.onrender.com/api/v1/admin/user/${id}`);
+      const config = { headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+   } };
+      const { data } = await axios.delete(`https://mernbackend-r4tf.onrender.com/api/v1/admin/user/${id}`,config);
   
       dispatch({ type: DELETE_USER_SUCCESS, payload: data });
     } catch (error) {

@@ -7,7 +7,14 @@ import {
   
   // Add to Cart
   export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/product/${id}`);
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      }
+    };
+
+    const { data } = await axios.get(`https://mernbackend-r4tf.onrender.com/api/v1/product/${id}`,config);
   
     dispatch({
       type: ADD_TO_CART,
