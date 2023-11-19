@@ -1,5 +1,6 @@
 const express= require("express");
 const app=express();
+const cors = require ("cors")
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middleware/error")
 const bodyParser = require("body-parser")
@@ -7,8 +8,16 @@ const fileUpload = require("express-fileupload")
 const dotenv = require ("dotenv");
 
 
+
 dotenv.config({path:"config/config.env"})
 //it is used to convert the body code into json.
+
+app.use(cors({
+    origin:["https://shop-online-lake.vercel.app/"],
+    methods :["POST","GET","PUT","DELETE"],
+    credentials:true
+}))
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}))
