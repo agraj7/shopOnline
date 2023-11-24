@@ -15,7 +15,6 @@ dotenv.config({path:"config/config.env"})
   
   app.use(
     cors({
-      origin: ["https://shop-online-qjr756ajn-agraj-ks-projects.vercel.app"],
       credentials: true,
     })
   );
