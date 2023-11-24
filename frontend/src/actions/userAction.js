@@ -43,10 +43,16 @@ import {
     try {
       dispatch({ type: LOGIN_REQUEST });
 
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
   
       const { data } = await axiosInstance.post(
         `api/v1/login`,
         { email, password },
+        config
 
       );
   
@@ -61,8 +67,13 @@ import {
     try {
       dispatch({ type: REGISTER_USER_REQUEST });
   
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-      const { data } = await axiosInstance.post(`api/v1/register`, userData);
+      const { data } = await axiosInstance.post(`api/v1/register`, userData,config);
   
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
     } catch (error) {
@@ -102,8 +113,14 @@ import {
   export const updateProfile = (userData) => async (dispatch) => {
     try {
       dispatch({ type: UPDATE_PROFILE_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
   
-      const { data } = await axiosInstance.put(`api/v1/me/update`, userData);
+      const { data } = await axiosInstance.put(`api/v1/me/update`, userData,config);
   
       dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
     } catch (error) {
@@ -118,10 +135,17 @@ import {
   export const updatePassword = (passwords) => async (dispatch) => {
     try {
       dispatch({ type: UPDATE_PASSWORD_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
   
       const { data } = await axiosInstance.put(
         `api/v1/password/update`,
         passwords,
+        config
       );
   
       dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
@@ -137,8 +161,14 @@ import {
   export const forgotPassword = (email) => async (dispatch) => {
     try {
       dispatch({ type: FORGOT_PASSWORD_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
   
-      const { data } = await axiosInstance.post(`api/v1/password/forgot`, email);
+      const { data } = await axiosInstance.post(`api/v1/password/forgot`, email,config);
   
 
       dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.message });
@@ -155,9 +185,16 @@ import {
     try {
       dispatch({ type: RESET_PASSWORD_REQUEST });
 
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
       const { data } = await axiosInstance.put(
         `api/v1/password/reset/${token}`,
         passwords,
+        config
 
       );
   
@@ -200,10 +237,17 @@ import {
   export const updateUser = (id, userData) => async (dispatch) => {
     try {
       dispatch({ type: UPDATE_USER_REQUEST });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
   
       const { data } = await axiosInstance.put(
         `api/v1/admin/user/${id}`,
         userData,
+        config
       );
   
       dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
