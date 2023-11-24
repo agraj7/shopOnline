@@ -10,7 +10,6 @@ const dotenv = require ("dotenv");
 
 
 dotenv.config({path:"config/config.env"})
-//it is used to convert the body code into json.
 
   
   app.use(
