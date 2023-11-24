@@ -16,8 +16,8 @@ import {toast} from "react-toastify";
 
 const UserOptions = ({user}) => {
   const { cartItems } = useSelector((state) => state.cart);
-  // const {user} = useSelector((state)=>state.user)
-  // console.log(user)
+  const {user} = useSelector((state)=>state.user)
+  console.log(user)
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   // const history = useHistory();
